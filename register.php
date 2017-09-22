@@ -12,7 +12,7 @@ and open the template in the editor.
     </head>
     <body>
         <h2>Register</h2>
-        <div class="container center">
+        <div class="container">
             
             <br>
             <label>Username</label>
@@ -27,7 +27,17 @@ and open the template in the editor.
             <input type="text" placeholder="Verify Password" name="passWordVerify" required>
             
             <br><br>
-            <button type="submit">Login</button>
+            <label>Location</label>
+            <input type="text" placeholder="Location" name="location" required>
+            
+            <br><br>
+            <label>Email Address</label>
+            <input type="text" placeholder="Contact Email" name="email" required>
+            
+            
+            
+            <br><br>
+            <button type="submit">Register</button>
             
             
         </div>
