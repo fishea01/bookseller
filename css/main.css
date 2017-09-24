@@ -1,6 +1,5 @@
-/*
-    Navbar specific styles
-*/
+
+/*Navbar Specific Styles*/
 
 .navbar-center {
     position: absolute;
@@ -16,12 +15,47 @@
 
 .navbar-brand,
 .navbar-nav li a {
-    line-height: 60px;
-    height: 60px;
+    line-height: 75px;
+    height: 75px;
     padding-top: 0;
 }
 
+/*Content Styles*/
 
+.center {
+    margin: auto;
+    width: 40%;
+    border: 3px solid lightgray;
+    padding: 10px;
+    padding-left: 25px;
+}
+
+
+/*Form Specific styles*/
+
+form-group {
+    width: 450px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    border: 2px solid navy;
+}
+
+label {
+    width: 10em;
+    padding-right: 1em;
+    float: left;
+}
+
+input[type="text"] {
+    float:left;
+    margin-bottom: .5em;
+}
+
+/*Misc Styles*/
+
+br {
+    clear: left;
+}
 
 
 
