@@ -24,9 +24,10 @@
 
         <br><br>
         <label>&nbsp;</label>
-        <button type="submit">Sell</button>
-        <button type="cancel">Cancel</button>
-
+        <div>
+            <button type="submit">Sell</button>
+            <button type="cancel">Cancel</button>
+        </div>
         <br/><br/>
     </div>
 
