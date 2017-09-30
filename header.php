@@ -44,7 +44,7 @@
                         </li>
                     </ul>
                     <form class=" navbar-form navbar-center">
-                        <div class="form-group input-group-sm">
+                        <div class="form-group input-group">
                             <input type="text" class="form-control input-sm" placeholder="Search">
                         </div>
                         <button type="submit" class="btn btn-default input-sm">Submit</button>
