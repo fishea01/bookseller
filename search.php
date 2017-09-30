@@ -3,13 +3,12 @@
 <div class="container">
     <div class="panel panel-default">
         <h2>Book Search</h2>
- 
         <!--Search in the header-->
         <div class="panel-heading text-center clearfix">
 
             <div class="pull-right">
-                <!--TODO: action needs to be the search results, back to the same page  GET or POST?--> 
-                <form class="form-inline input-group" action="search.php" method="POST">
+                
+                <form class="form-inline input-group">
                     <div class="form-group">
                         <input type="text" class="form-control" id="searchFor" placeholder="Book / ISBN ">
                     </div>
@@ -50,6 +49,13 @@
                     </tr>
                     <tr>
                         <td>Book Title 3</td>
+                        <td>000000000000</td>
+                        <td>$0.00</td>
+                        <td>Bad</td>
+                        <td>Franklin University</td>       
+                    </tr>
+                    <tr>
+                        <td>Book Title 4</td>
                         <td>000000000000</td>
                         <td>$0.00</td>
                         <td>Bad</td>
