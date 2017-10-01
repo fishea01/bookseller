@@ -70,7 +70,7 @@
 
         <!--TODO: Search results maybe?--> 
         <div class="panel-footer text-center">
-            <p>3 records found</p>
+            <p>4 records found</p>
         </div>
 
 
