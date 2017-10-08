@@ -11,22 +11,22 @@ if (array_key_exists('check_submit', $_POST)) {
 	$dbusername = 'frank73_f17book';
     $dbpassword = 'Book.f17';
 	$host = 'www.franklinpracticum.com';
-	$db = 'frank73_sf17book';
+	$db = 'frank73_f17book';
 	$connect = new PDO("mysql:host=$host;dbname=$db;", $dbusername, $dbpassword);
 	$connect -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
 	//Variable used to check if a username exists in the database.
-	$usernameQuery = $connect->prepare("SELECT username FROM $db.users WHERE username = :username");
+	$usernameQuery = $connect->prepare("SELECT username FROM USERS WHERE username = :username");
 	$usernameQuery -> bindParam(":username", $username);
 	$usernameQuery -> execute();
 	
 	//Variable used to check if an email exists in the database.
-	$emailQuery = $connect->prepare("SELECT email_address FROM $db.users WHERE email_address = :email");
+	$emailQuery = $connect->prepare("SELECT email_address FROM USERS WHERE email_address = :email");
 	$emailQuery -> bindParam(":email", $email);
 	$emailQuery -> execute();
 	
 	//Variable holding the String to insert values into the database.
-	$insert = "INSERT INTO $db.users (username, password, first_name, middle_initial, last_name, location, email_address, area_code, phone_number)
+	$insert = "INSERT INTO USERS (username, password, first_name, middle_initial, last_name, location, email_address, area_code, phone_number)
 		VALUES ('$username', '$password', null, null, null, '$school', '$email', null, null)";
 	
 	//Checks if passwords do not match.

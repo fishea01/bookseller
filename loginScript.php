@@ -5,9 +5,9 @@ if (array_key_exists('loginSubmit', $_POST)) {
     
 	//Database connection information.
 	$dbusername = 'frank73_f17book';
-    $dbpassword = 'Book.f17';
+        $dbpassword = 'Book.f17';
 	$host = 'www.franklinpracticum.com';
-	$db = 'frank73_sf17book';
+	$db = 'frank73_f17book';
                 
         try {
             $connect = new PDO("mysql:host=$host;dbname=$db;", $dbusername, $dbpassword);
@@ -35,8 +35,7 @@ if (array_key_exists('loginSubmit', $_POST)) {
             // will be available thoughout a logged in session
             $_SESSION['user_data'] = array(
               
-                "firstName" => $result['first_name'],
-                "lastName"  => $result['last_name'],
+                "username" => $result['username'],
                 "email"     => $result['email_address']
             );
             

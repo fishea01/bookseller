@@ -57,8 +57,7 @@ if(session_status() == PHP_SESSION_NONE) {
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                                             role="button" aria-haspopup="true" 
                                             aria-expanded="false">
-                                            <?php echo $_SESSION['user_data']['firstName'].' '.
-                                                       $_SESSION['user_data']['lastName']; ?>
+                                            <?php echo $_SESSION['user_data']['username']; ?>
                                             
                                             <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
