@@ -4,17 +4,21 @@
         <div class="container">
             <h2>Login</h2>
             <br>
-            <label>Username</label>
-            <input type="text" placeholder="Enter Username" name="userName" required>
-            
-            <br><br>
-            <label>Password</label>
-            <input type="text" placeholder="Enter Password" name="passWord" required>
-            
-            <br><br>
-            <label>&nbsp;</label>
-            <button type="submit">Login</button>
-            
+            <form name="login" action="loginScript.php" method="post">
+                <input type="hidden" name="loginSubmit" value="1"/>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" required>
+                </div>
+                <br><br>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password"  name="password" required>
+                </div>
+                <br><br>
+                <label>&nbsp;</label>
+                <button type="submit">Login</button>
+            </form>
             <br /><br />
            
         </div>

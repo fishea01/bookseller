@@ -8,7 +8,7 @@
         <div class="panel-heading text-center clearfix">
 
             <div class="pull-left">
-                <h3>Most Recent Additions</h3>
+                <h3>Your Listings</h3>
             </div>
         </div>
 
@@ -20,7 +20,9 @@
                 <div class="row">
                     <div class="col-md-3"><a href="#">Book Title 1</a></div>
                     <div class="col-md-3">$0.00</div>
-                    <div class="col-md-3"><a href="#"><i class="glyphicon glyphicon-remove"></i></a></div>
+                    <div class="col-md-3"><a href="#">
+                            <button type="button" class="btn btn-default">Remove</button>
+                    </div>
                     <div class="col-md-3">
                         <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#mark1Sold">Mark as Sold</button>
                     </div>
