@@ -45,18 +45,13 @@ if(session_status() == PHP_SESSION_NONE) {
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
-
-                        </li>
+                        <li><a href="sell.php">Sell Book</a></li>
+                        <li><a href="search.php">Book Search</a></li>
                     </ul>
-                    <form class=" navbar-form navbar-center">
-                        <div class="form-group input-group">
-                            <input type="text" class="form-control input-sm">
-                        </div>
-                        <button type="submit" class="btn btn-default input-sm">Submit</button>
-                    </form>
+                    
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (isset($_SESSION['is_logged_in'])) : ?>
-                            <li><a href="sell.php">List Book</a></li>
+                            
                             
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" 

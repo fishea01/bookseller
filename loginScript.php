@@ -3,7 +3,7 @@ if (array_key_exists('loginSubmit', $_POST)) {
     
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     
-//	Database connection information.
+	//Database connection information.
 	$dbusername = 'frank73_f17book';
     $dbpassword = 'Book.f17';
 	$host = 'www.franklinpracticum.com';
@@ -45,6 +45,6 @@ if (array_key_exists('loginSubmit', $_POST)) {
             echo 'Incorrect Login';
             header("refresh:2;url=login.php");
         }
-    }
+        }
 
 ?>
