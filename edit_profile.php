@@ -70,7 +70,7 @@
 				<br>
 				<br>
 				
-				<label>Location: </label>
+				<label>School: </label>
 			<?php
 				if ($result['location'] != NULL)
 				{ ?>	
