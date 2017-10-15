@@ -44,9 +44,9 @@ if(session_status() == PHP_SESSION_NONE) {
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
-                        <li><a href="sell.php">Sell Book</a></li>
-                        <li><a href="search.php">Book Search</a></li>
+                        <li class="<?php echo (strpos($_SERVER['REQUEST_URI'], "index.php") ? "active" : "") ;?>"><a href="index.php">Home</a></li>
+                        <li class="<?php echo (strpos($_SERVER['REQUEST_URI'], "sell.php") ? "active" : "");?>"><a href="sell.php">Sell Book</a></li>
+                        <li class="<?php echo (strpos($_SERVER['REQUEST_URI'], "search.php") ? "active" : "");?>"><a href="search.php">Book Search</a></li>
                     </ul>
                     
                     <ul class="nav navbar-nav navbar-right">
@@ -68,8 +68,8 @@ if(session_status() == PHP_SESSION_NONE) {
                                 </ul>
                             </li>
                         <?php else : ?>
-                            <li><a href="login.php">Login</a></li>
-                            <li><a href="register.php">Register</a></li>
+                            <li class="<?php echo (strpos($_SERVER['REQUEST_URI'], "login.php") ? "active" : "");?>"><a href="login.php">Login</a></li>
+                            <li class="<?php echo (strpos($_SERVER['REQUEST_URI'], "register.php") ? "active" : "");?>"><a href="register.php">Register</a></li>
                         <?php endif; ?>
 
                     </ul>
