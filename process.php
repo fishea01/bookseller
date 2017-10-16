@@ -2,10 +2,13 @@
 if (array_key_exists('check_submit', $_POST)) {
     
     //Variables storing information from register.php.	
-	$school = $_POST['school'];
-	$email = $_POST['email'];
-	$password = $_POST['passWord'];
-	$username = $_POST['userName'];	
+	$school = trim($_POST['school']);
+	$email = trim($_POST['email']);
+	$password = trim($_POST['passWord']);
+	$username = trim($_POST['userName']);
+        $firstName = trim($_POST['firstName']);
+        $lastName = trim($_POST['lastName']);
+        $phoneNumber = trim($_POST['phoneNumber']);
 	
 	//Database connection information.
 	$dbusername = 'frank73_f17book';
@@ -26,8 +29,8 @@ if (array_key_exists('check_submit', $_POST)) {
 	$emailQuery -> execute();
 	
 	//Variable holding the String to insert values into the database.
-	$insert = "INSERT INTO USERS (username, password, first_name, middle_initial, last_name, location, email_address, area_code, phone_number)
-		VALUES ('$username', '$password', null, null, null, '$school', '$email', null, null)";
+	$insert = "INSERT INTO USERS (username, password, first_name, last_name, phone_number, location, email_address)
+		VALUES ('$username', '$password', '$firstName', '$lastName', '$phoneNumber', '$school', '$email')";
 	
 	//Checks if passwords do not match.
 	if ($password != $_POST['passWordVerify'])
@@ -58,13 +61,32 @@ if (array_key_exists('check_submit', $_POST)) {
 	{
 		echo("Please enter a valid email address.");
 		header("refresh:5;url = register.php");
-	}		
+	}
+        else if (strlen($school) <= 0)
+        {
+            echo("Please enter a valid school.");
+            header("refresh:5;url = register.php");
+        }
+        else if (strlen($firstName) <= 0)
+        {
+            echo("Please enter a valid first name.");
+            header("refresh:5;url = register.php");
+        }
+        else if (strlen($lastName) <= 0)
+        {
+            echo("Please enter a valid last name.");
+            header("refresh:5;url = register.php");
+        }
+        else if (!ctype_digit($phoneNumber))
+	{
+		echo("Please enter a valid phone number.");
+		header("refresh:5;url = edit_profile.php");
+	}
 	//If all is successful, adds the user account to the database.
 	else
 	{
 		$connect->exec($insert);
-		echo "User successfully registered!";
-		header("refresh:5;url=register.php"); //register.php needs changed to the appropriate page after successful registration.
+		header("Location: login.php"); //register.php needs changed to the appropriate page after successful registration.
 	}
 }
 ?>

@@ -3,11 +3,11 @@ session_start();
 if (array_key_exists('check_submit', $_POST)) {
 	
 	//Variables storing information from edit_profile.php
-	$first_name = $_POST['first_name'];
-	$last_name = $_POST['last_name'];
-	$phone_number = $_POST['phone_number'];
-	$location = $_POST['location'];
-	$email = $_POST['email'];
+	$first_name = trim($_POST['first_name']);
+	$last_name = trim($_POST['last_name']);
+	$phone_number = trim($_POST['phone_number']);
+	$location = trim($_POST['location']);
+	$email = trim($_POST['email']);
 	$username = $_SESSION['user_data']['username'];
 	
 	//Database connection information.
@@ -27,8 +27,9 @@ if (array_key_exists('check_submit', $_POST)) {
 	$emailQuery = $connect->prepare("SELECT email_address FROM USERS WHERE email_address = :email");
 	$emailQuery -> bindParam(":email", $email);
 	$emailQuery -> execute();
+        $result = $emailQuery->fetch(PDO::FETCH_ASSOC);
 	
-	if ($emailQuery -> rowCount() > 0 || !filter_var($email, FILTER_VALIDATE_EMAIL)) 
+	if (($emailQuery -> rowCount() > 0 && $result['email_address'] !== $email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) 
 	{
 		echo("Invalid Email. Returning to Profile.");
 		header("refresh:5;url = edit_profile.php");
@@ -38,6 +39,21 @@ if (array_key_exists('check_submit', $_POST)) {
 		echo("Phone number contains one or more non-numeric values. Returning to Profile.");
 		header("refresh:5;url = edit_profile.php");
 	}
+        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+	{
+            echo("Please enter a valid school. Returning to Profile.");
+            header("refresh:5;url = edit_profile.php");
+	}
+        else if (strlen($first_name) <= 0)
+        {
+            echo("Please enter a valid first name. Returning to Profile.");
+            header("refresh:5;url = edit_profile.php");
+        }
+        else if (strlen($last_name) <= 0)
+        {
+            echo("Please enter a valid last name. Returning to Profile.");
+            header("refresh:5;url = edit_profile.php");
+        }
 	else
 	{
 		$update_query -> execute();

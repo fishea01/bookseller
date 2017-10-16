@@ -25,76 +25,76 @@
 			<form name="update_profile" action="edit_profile_process.php" method="post">
 			<input type="hidden" name="check_submit" value="1"/>			
 				<br>
-				<label>First Name: </label>
+				<label class="form-label">First Name: </label>
 			<?php
 				if ($result['first_name'] != NULL)
 				{ ?>			
-					<input type="text" name="first_name" placeholder="<?= $result['first_name']?>" required>				
+					<input type="text" name="first_name" value="<?= $result['first_name']?>" required>				
 			<?php 
 				}
 				else
 				{ ?>
-					<input type="text" name="first_name" placeholder="No First Name" required>
+					<input type="text" name="first_name" required>
 			<?php
 				} ?>
 				<br>
 				<br>
 				
-				<label>Last Name: </label>				
+				<label class="form-label">Last Name: </label>				
 			<?php
 				if ($result['last_name'] != NULL)
 				{ ?>				
-					<input type="text" name="last_name" placeholder="<?= $result['last_name']?>" required>				
+					<input type="text" name="last_name" value="<?= $result['last_name']?>" required>				
 			<?php 
 				}
 				else
 				{ ?>
-					<input type="text" name="last_name" placeholder="No Last Name" required>	
+					<input type="text" name="last_name" required>	
+			<?php
+				} ?>				
+				<br>
+				<br>
+                                
+                                <label class="form-label">Phone Number: </label>				
+			<?php
+				if ($result['phone_number'] != NULL)
+				{ ?>				
+					<input type="text" name="phone_number" value="<?= $result['phone_number']?>" required>				
+			<?php 
+				}
+				else
+				{ ?>
+					<input type="text" name="phone_number" required>	
 			<?php
 				} ?>				
 				<br>
 				<br>
 				
-				<label>Phone Number: </label>
-			<?php
-				if ($result['phone_number'] != NULL)
-				{ ?>	
-					<input type="text" name="phone_number" placeholder="<?= $result['phone_number']?>" maxlength="10" required>
-			<?php 
-				}
-				else
-				{ ?>
-					<input type="text" name="phone_number" placeholder="No Phone Number" maxlength="10" required>
-			<?php
-				} ?>
-				<br>
-				<br>
-				
-				<label>School: </label>
+				<label class="form-label">School: </label>
 			<?php
 				if ($result['location'] != NULL)
 				{ ?>	
-					<input type="text" name="location" placeholder="<?= $result['location']?>" required>				
+					<input type="text" name="location" value="<?= $result['location']?>" required>				
 			<?php 
 				}
 				else
 				{ ?>	
-					<input type="text" name="location" placeholder="No Location" required>				
+					<input type="text" name="location" required>				
 			<?php
 				} ?>
 				<br>
 				<br>
 				
-				<label>Email: </label>
+				<label class="form-label">Email: </label>
 			<?php
 				if ($result['email_address'] != NULL)
 				{ ?>				
-					<input type="text" name="email" placeholder="<?= $result['email_address']?>" required>
+					<input type="text" name="email" value="<?= $result['email_address']?>" required>
 			<?php 
 				}
 				else
 				{ ?>	
-					<input type="text" name="email" placeholder="No Email Address" required>				
+					<input type="text" name="email" required>				
 			<?php
 				} ?>
 				<br>

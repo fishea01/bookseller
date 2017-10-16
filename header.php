@@ -52,7 +52,6 @@ if(session_status() == PHP_SESSION_NONE) {
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (isset($_SESSION['is_logged_in'])) : ?>
                             
-                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                                             role="button" aria-haspopup="true" 
@@ -68,6 +67,7 @@ if(session_status() == PHP_SESSION_NONE) {
                                 </ul>
                             </li>
                         <?php else : ?>
+                            
                             <li class="<?php echo (strpos($_SERVER['REQUEST_URI'], "login.php") ? "active" : "");?>"><a href="login.php">Login</a></li>
                             <li class="<?php echo (strpos($_SERVER['REQUEST_URI'], "register.php") ? "active" : "");?>"><a href="register.php">Register</a></li>
                         <?php endif; ?>

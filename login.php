@@ -4,15 +4,23 @@
         <div class="container">
             <h2>Login</h2>
             <br>
+            <?php
+                if (isset($_SESSION['invalid']) && $_SESSION['invalid'] === true) :
+                    session_unset();
+                    session_destroy();
+            ?>
+            <label class="error">Invalid Username or Password</label>
+            <br>
+            <?php endif; ?>
             <form name="login" action="loginScript.php" method="post">
                 <input type="hidden" name="loginSubmit" value="1"/>
                 <div class="form-group">
-                    <label>Username</label>
+                    <label class="form-label">Username</label>
                     <input type="text" name="username" required>
                 </div>
                 <br><br>
                 <div class="form-group">
-                    <label>Password</label>
+                    <label class="form-label">Password</label>
                     <input type="password"  name="password" required>
                 </div>
                 <br><br>
