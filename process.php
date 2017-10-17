@@ -80,7 +80,7 @@ if (array_key_exists('check_submit', $_POST)) {
         else if (!ctype_digit($phoneNumber))
 	{
 		echo("Please enter a valid phone number.");
-		header("refresh:5;url = edit_profile.php");
+		header("refresh:5;url = register.php");
 	}
 	//If all is successful, adds the user account to the database.
 	else
