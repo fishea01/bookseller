@@ -13,7 +13,7 @@ if (array_key_exists('check_sell', $_POST)) {
     
     // TODO: this required product code needs to be changed to something
     // such as an auto increment primary key and removed from the query 
-    $product_code = 'code10';
+    $product_code = 'code11';
 
     $displayError = false;
     //Database connection information.

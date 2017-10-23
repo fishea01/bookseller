@@ -14,10 +14,6 @@ $db = 'frank73_f17book';
 $connect = new PDO("mysql:host=$host;dbname=$db;", $dbusername, $dbpassword);
 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$profile_query = $connect->prepare("SELECT first_name, last_name, location, email_address, phone_number FROM USERS WHERE username = :username");
-$profile_query->bindParam(":username", $username);
-$profile_query->execute();
-$result = $profile_query->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <div class="from-group center">
