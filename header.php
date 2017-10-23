@@ -60,7 +60,7 @@ if(session_status() == PHP_SESSION_NONE) {
                                             
                                             <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="profile.php">Profile</a></li>
+                                    <li><a href="profile.php?username=<?php echo $_SESSION['user_data']['username']; ?>">Profile</a></li>
                                     <li><a href="edit_profile.php">Edit Profile</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="logoutScript.php">Logout</a></li>
