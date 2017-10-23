@@ -34,7 +34,9 @@ if (array_key_exists('loginSubmit', $_POST))
              
         // Used to store session data, can add anything what was retreived from database
         // will be available thoughout a logged in session
-        $_SESSION['user_data'] = array("username" => $result['username'],"email" => $result['email_address']);             
+        $_SESSION['user_data'] = array("username" => $result['username'],
+                                       "email" => $result['email_address'],
+                                       "location" => $result['location']);             
         header("Location: index.php");
     } 
     else 
