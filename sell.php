@@ -13,7 +13,6 @@ $host = 'www.franklinpracticum.com';
 $db = 'frank73_f17book';
 $connect = new PDO("mysql:host=$host;dbname=$db;", $dbusername, $dbpassword);
 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 ?>
 
 <div class="from-group center">
@@ -39,9 +38,21 @@ $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             <input type="text" placeholder="0.00" name="price" required>
 
             <br><br>
+            <!--            
+                        <label class="form-label">Quality of Book</label>
+                        <input type="text" placeholder="Enter Quality" name="quality" required>
+            -->
             <label class="form-label">Quality of Book</label>
-            <input type="text" placeholder="Enter Quality" name="quality" required>
-
+            <select id="select" name="quality"  required>
+                <option value="">Select Quality</option>
+                <option value="Like New">Like New</option>
+                <option value="Fine">Fine</option>
+                <option value="Very Good">Very Good</option>
+                <opiton value="Good">Good</opiton>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+            </select>
+            
             <br><br>
             <label>&nbsp;</label>
             <div>
