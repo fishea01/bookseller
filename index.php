@@ -1,70 +1,109 @@
+<?php 
+	session_start();
+	include 'header.php';
+	
+	//Database connection information.
+	$dbusername = 'frank73_f17book';
+    $dbpassword = 'Book.f17';
+	$host = 'www.franklinpracticum.com';
+	$db = 'frank73_f17book';
+	$connect = new PDO("mysql:host=$host;dbname=$db;", $dbusername, $dbpassword);
+	$connect -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	if (session_status() != PHP_SESSION_NONE)
+	{
+		$username = $_SESSION["user_data"]["username"];
+	}
+	$booksForSaleQuery = $connect -> prepare('SELECT title, price, product_code FROM PRODUCT WHERE username = :username AND sold = 0');
+	$booksForSaleQuery -> bindParam(":username", $username);
+	$booksForSaleQuery -> execute();
+	
+	$purchaseQuery = $connect -> prepare("SELECT * FROM SALES WHERE username = :username AND seller_rating = null OR seller_comment = null ORDER BY purchase_date DESC LIMIT 0, 3");
+	$purchaseQuery -> bindParam(":username", $username);
+	$purchaseQuery -> execute();
+	
+?>
 
-<?php include 'header.php'; ?>
-
-<div class="container">
+	<div class="container">
     <div class="panel panel-default">
-
+	
         <!--Search in the header-->
         <div class="panel-heading text-center clearfix">
-
             <div class="pull-left">
                 <h3>Your Listings</h3>
             </div>
         </div>
-
-        <div class="panel-body">
-
-
-            <div class="container">
-                <!-- TODO: If book is listed by logged in user then show the remove button otherwise do not-->
-                <div class="row">
-                    <div class="col-md-3"><a href="#">Book Title 1</a></div>
-                    <div class="col-md-3">$0.00</div>
-                    <div class="col-md-3"><a href="#">
-                            <button type="button" class="btn btn-default">Remove</button>
-                    </div>
-                    <div class="col-md-3">
-                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#mark1Sold">Mark as Sold</button>
-                    </div>
+	
+<?php	
+	if ($booksForSaleQuery -> rowCount() > 0)
+	{
+		$booksForSaleQueryResult = $booksForSaleQuery -> fetchAll();
+		
+		foreach($booksForSaleQueryResult as $b)
+		{
+			$title = $b[0];
+			$price = $b[1];
+			$product_code = $b[2];
+			//define an int and increment, attach to stars
+?>	
+	<div class="panel-body">
+		<div class="container">	
+			<div class="row">
+                
+				<div class="col-md-3"><a href="book.php?product_code=<?php echo $product_code ?>"><?php echo $title?></a></div>
+                <div class="col-md-3">$ <?php echo $price?></div>
+                    
+                <div class="col-md-3">
+                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<?php echo $product_code?>">Mark as Sold</button>
                 </div>
-
-                <!--The collapsible div under the book--> 
-                <div id="mark1Sold" class="collapse">
-
-                    <form>
-
+					<div class="col-md-3">
+					<form action="index_remove.php" method="post">
+						<input type="hidden" name="bookVal" value="<?php echo $product_code ?>"></input>
+						<button type="submit" class="btn btn-default">Remove</button>
+					</form>
+					</div>
+            </div>
+			
+			<!--The collapsible div under the book-->
+                <div id="<?php echo $product_code?>" class="collapse">
+                    <form name="formOne" method="post" action="index_process.php">
+						<input type="hidden" name="bookValue" value="<?php echo $product_code ?>"></input>
                         <div class="row">
                             <div class="col-md-offset-1 col-md-9"><hr></div>
                         </div>
-                        <!--Top row of the collapsible--> 
-
-                        <div class="row clearfix">
-
-                            <div class="col-md-offset-1 col-md-4">
-                                <div class="form-inline">
+						
+                        <!--Top row of the collapsible-->
+						<div class="row clearfix">
+							<div class="col-md-offset-1 col-md-4">
+								<div class="form-inline">
                                     <label for="buyerEmail">Buyers Email:</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <input type="email" class="email" name="inputEmail" required></input>
                                 </div>
                             </div>
+							<!--Rating Script-->
+							<script type="text/javascript">
+							$('.rating-container .glyphicon-star-empty').click(function() {
+							$('.rating-container .glyphicon-star-empty').removeClass('selected');
+							$(this).prevAll('.glyphicon-star-empty').addBack().addClass('selected');
+							var rating = $(this).data('rating');
+							$('#rating').val(rating);
+							});
+							</script>
                             <div class="col-md-offset-1 col-md-2">
-                                <div class="form-group">
-
-                                    <i class="glyphicon glyphicon glyphicon-star"></i>
-                                    <i class="glyphicon glyphicon glyphicon-star"></i>
-                                    <i class="glyphicon glyphicon glyphicon-star-empty"></i>
-                                    <i class="glyphicon glyphicon glyphicon-star-empty"></i>
-                                    <i class="glyphicon glyphicon glyphicon-star-empty"></i>
+                                <div class="rating-container">
+									<input type="hidden" id="rating" name="rating" value="-1"></input>
+                                    <div class="glyphicon glyphicon glyphicon-star-empty" data-rating="1"></div>
+                                    <div class="glyphicon glyphicon glyphicon-star-empty" data-rating="2"></div>
+                                    <div class="glyphicon glyphicon glyphicon-star-empty" data-rating="3"></div>
+                                    <div class="glyphicon glyphicon glyphicon-star-empty" data-rating="4"></div>
+                                    <div class="glyphicon glyphicon glyphicon-star-empty" data-rating="5"></div>
                                 </div>
                             </div>
                             <div clas="col-md-offset-2 col-md-2">
-                                <div class="form-group">
-
-                                    <button type="button" class="btn btn-default">Submit</button>
-                                    <button type="button" class="btn btn-default">Cancel</button>
+                                <div class="form-group">									
+                                    <button type="submit" class="btn btn-default">Submit</button>
+									<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<?php echo $product_code?>">Cancel</button>									
                                 </div>
                             </div>
-
-
                         </div>
 
                         <!--Bottom row of the collapsible--> 
@@ -72,7 +111,7 @@
                             <div class="col-md-offset-1 col-md-9">
                                 <div class="form-group">
                                     <label for="comment">Comment:</label>
-                                    <textarea class="form-control" rows="4" id="comment"></textarea>
+                                    <textarea name="sellerComment" class="form-control" rows="4" id="comment" value="<?php echo $comment?>"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -82,89 +121,15 @@
                                 </div> 
                             </div>
                         </div>
-
                     </form>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12"><hr></div>
-            </div>
-
-            <div class="container">
-                <!-- TODO: If book is listed by logged in user then show the remove button otherwise do not-->
-                <div class="row">
-                    <div class="col-md-3"><a href="#">Book Title 2</a></div>
-                    <div class="col-md-3">$0.00</div>
-                    <div class="col-md-3"><a href="#"></a></div>
-                    <div class="col-md-3">
-                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#mark2Sold">Mark as Sold</button>
-                    </div>
-                </div>
-
-                <!--The collapsible div under the book--> 
-                <div id="mark2Sold" class="collapse">
-
-                    <form>
-
-                        <div class="row">
-                            <div class="col-md-offset-1 col-md-9"><hr></div>
-                        </div>
-                        <!--Top row of the collapsible--> 
-
-                        <div class="row clearfix">
-
-                            <div class="col-md-offset-1 col-md-4">
-                                <div class="form-inline">
-                                    <label for="buyerEmail">Buyers Email:</label>
-                                    <input type="email" class="form-control" id="email" required>
-                                </div>
-                            </div>
-                            <div class="col-md-offset-1 col-md-2">
-                                <div class="form-group">
-
-                                    <i class="glyphicon glyphicon glyphicon-star"></i>
-                                    <i class="glyphicon glyphicon glyphicon-star"></i>
-                                    <i class="glyphicon glyphicon glyphicon-star-empty"></i>
-                                    <i class="glyphicon glyphicon glyphicon-star-empty"></i>
-                                    <i class="glyphicon glyphicon glyphicon-star-empty"></i>
-                                </div>
-                            </div>
-                            <div clas="col-md-offset-2 col-md-2">
-                                <div class="form-group">
-
-                                    <button type="button" class="btn btn-default">Submit</button>
-                                    <button type="button" class="btn btn-default">Cancel</button>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <!--Bottom row of the collapsible--> 
-                        <div class="row">
-                            <div class="col-md-offset-1 col-md-9">
-                                <div class="form-group">
-                                    <label for="comment">Comment:</label>
-                                    <textarea class="form-control" rows="4" id="comment"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-inline">
-                                    <label>&nbsp;</label>
-
-                                </div> 
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
+			</div>
         </div>
-
-        <!--TODO: Search results maybe?--> 
+                
+<?php	}
+	} ?>
         <div class="panel-footer text-center">
-            <p>2 books listed</p>
+            <p><?php echo $booksForSaleQuery -> rowCount()?> books listed</p>
         </div>
     </div>
 
@@ -177,12 +142,33 @@
                 <h3>Recent Purchases</h3>
             </div>
         </div>
-
+<?php
+	if ($purchaseQuery -> rowCount() > 0 )
+	{
+		$purchaseQueryResult = $purchaseQuery -> fetchAll();
+		
+		foreach($purchaseQuery as $p)
+		{
+			$titlePurchase = $p[0];
+?>
         <div class="panel-body">
-
-            <p>Nothing here currently...go buy some books! :)</p>
-
-        </div>
+			<div class="container">	
+				<div class="row">
+                    <div class="col-md-3"><a href="book.php?product_code=<?php echo $product_code ?>"><?php echo $titlePurchase?></a></div>
+					<div class="col-md-3">
+                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<?php echo $product_code?>">Mark as Sold</button>
+                    </div>
+				</div>
+			</div>
+		</div>
+<?php
+		}
+	}
+	else 
+	{ ?>
+		<p>Nothing here currently...go buy some books! :)</p>
+<?php
+	} ?>
 
         <!--TODO: Search results maybe?--> 
         <div class="panel-footer text-center">
@@ -194,3 +180,4 @@
 </div>
 </body>
 </html>
+

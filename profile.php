@@ -70,7 +70,7 @@
 					} 					
 					else
 					{ ?>
-						<p><?php echo $usernameProfile ?> has no ratings!</p>
+						<p><?php echo ucwords($usernameProfile) ?> has no ratings!</p>
 					<?php
 					} ?>
 				<br>

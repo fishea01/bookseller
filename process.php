@@ -6,9 +6,9 @@ if (array_key_exists('check_submit', $_POST)) {
 	$email = trim($_POST['email']);
 	$password = trim($_POST['passWord']);
 	$username = trim($_POST['userName']);
-        $firstName = trim($_POST['firstName']);
-        $lastName = trim($_POST['lastName']);
-        $phoneNumber = trim($_POST['phoneNumber']);
+    $firstName = trim($_POST['firstName']);
+    $lastName = trim($_POST['lastName']);
+    $phoneNumber = trim($_POST['phoneNumber']);
 	
 	//Database connection information.
 	$dbusername = 'frank73_f17book';
@@ -62,22 +62,22 @@ if (array_key_exists('check_submit', $_POST)) {
 		echo("Please enter a valid email address.");
 		header("refresh:5;url = register.php");
 	}
-        else if (strlen($school) <= 0)
-        {
-            echo("Please enter a valid school.");
-            header("refresh:5;url = register.php");
-        }
-        else if (strlen($firstName) <= 0)
-        {
-            echo("Please enter a valid first name.");
-            header("refresh:5;url = register.php");
-        }
-        else if (strlen($lastName) <= 0)
-        {
-            echo("Please enter a valid last name.");
-            header("refresh:5;url = register.php");
-        }
-        else if (!ctype_digit($phoneNumber))
+    else if (strlen($school) <= 0)
+    {
+		echo("Please enter a valid school.");
+        header("refresh:5;url = register.php");
+    }
+    else if (strlen($firstName) <= 0)
+    {
+		echo("Please enter a valid first name.");
+        header("refresh:5;url = register.php");
+    }
+    else if (strlen($lastName) <= 0)
+    {
+        echo("Please enter a valid last name.");
+        header("refresh:5;url = register.php");
+    }
+    else if (!ctype_digit($phoneNumber))
 	{
 		echo("Please enter a valid phone number.");
 		header("refresh:5;url = register.php");

@@ -64,3 +64,11 @@ br {
 .collapse.show {
   visibility: visible;
 }
+
+.glyphicon-star-empty:before{
+	content: "\e007";
+}
+.selected:before {
+    content: "\e006";
+}
+
